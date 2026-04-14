@@ -1,0 +1,18 @@
+.card {
+  margin: 20px;
+  padding: 20px;
+}
+
+.para {
+  margin: 50px;
+}
+
+.xyz {
+  text-decoration: none;
+  margin: 10px;
+}
+
+.abc {
+  display: flex;
+  justify-content: space-between;
+}
