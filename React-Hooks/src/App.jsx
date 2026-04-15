@@ -26,23 +26,97 @@
 // };
 
 // export default App;
+// import { useState } from "react";
+// import Tv1 from "./assets/Tv1.jpg";
+// import Travel from "./assets/Travel.jpg";
+
+// function App() {
+//   const [img, setImage] = useState(Tv1);
+
+//   function changeImage() {
+//     setImage(Travel);
+//   }
+
+//   return (
+//     <div>
+//       <img src={img} alt="img1" height="200px" width="300px" />
+//       <button onClick={changeImage}>Change Image</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// function ShoppingCart() {
+
+//     const [cartCount, setCartCount] = useState(0);
+
+//     const addItem = () => {
+//         setCartCount(prevCount => prevCount + 1);
+//     }
+//     const removeItem = () => {
+//         setCartCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
+//     };
+
+//     return(
+//         <div style={{textAlign:"center"}}>
+//             <h2>Shopping Cart</h2>
+//             <p>Items in cart : {cartCount}</p>
+//             <button onClick={addItem}>Add to cart</button>
+//             <button onClick={removeItem} disabled={cartCount === 0}>Remove Item</button>
+//         </div>
+//     )
+// }
+// export default ShoppingCart;
+
 import { useState } from "react";
-import Tv1 from "./assets/Tv1.jpg";
-import Travel from "./assets/Travel.jpg";
+import AddTodo from "./components/AddTodo";
+import TaskList from "./components/TaskList";
 
-function App() {
-  const [img, setImage] = useState(Tv1);
+let nextId = 3;
 
-  function changeImage() {
-    setImage(Travel);
+const initialTodo = [
+  { id: 0, title: "Buy Milk", done: false },
+  { id: 1, title: "Go to Market", done: true },
+  { id: 2, title: "Back to Home", done: false },
+];
+
+export default function TaskApp() {
+  const [todos, setTodos] = useState(initialTodo);
+
+  function handleAddTodo(title) {
+    setTodos([
+      ...todos,
+      {
+        id: nextId++,
+        title: title,
+        done: false,
+      },
+    ]);
+  }
+  function handleChangeTodo(nextTodo) {
+    setTodos(
+      todos.map((t) => {
+        if (t.id === nextTodo.id) {
+          return nextTodo;
+        } else {
+          return t;
+        }
+      }),
+    );
   }
 
+  function handleDeleteTodo(todoId) {
+    setTodos(todos.filter((t) => t.id !== todoId));
+  }
   return (
-    <div>
-      <img src={img} alt="img1" height="200px" width="300px" />
-      <button onClick={changeImage}>Change Image</button>
-    </div>
+    <>
+      <AddTodo onAddTodo={handleAddTodo} />
+      <TaskList
+        todos={todos}
+        onChangeTodo={handleChangeTodo}
+        onDeleteTodo={handleDeleteTodo}
+      />
+    </>
   );
-}
-
-export default App;
+};
