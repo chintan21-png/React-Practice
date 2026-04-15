@@ -69,54 +69,80 @@
 // }
 // export default ShoppingCart;
 
-import { useState } from "react";
-import AddTodo from "./components/AddTodo";
-import TaskList from "./components/TaskList";
+// import { useState } from "react";
+// import AddTodo from "./components/AddTodo";
+// import TaskList from "./components/TaskList";
 
-let nextId = 3;
+// let nextId = 3;
 
-const initialTodo = [
-  { id: 0, title: "Buy Milk", done: false },
-  { id: 1, title: "Go to Market", done: true },
-  { id: 2, title: "Back to Home", done: false },
-];
+// const initialTodo = [
+//   { id: 0, title: "Buy Milk", done: false },
+//   { id: 1, title: "Go to Market", done: true },
+//   { id: 2, title: "Back to Home", done: false },
+// ];
 
-export default function TaskApp() {
-  const [todos, setTodos] = useState(initialTodo);
+// export default function TaskApp() {
+//   const [todos, setTodos] = useState(initialTodo);
 
-  function handleAddTodo(title) {
-    setTodos([
-      ...todos,
-      {
-        id: nextId++,
-        title: title,
-        done: false,
-      },
-    ]);
-  }
-  function handleChangeTodo(nextTodo) {
-    setTodos(
-      todos.map((t) => {
-        if (t.id === nextTodo.id) {
-          return nextTodo;
-        } else {
-          return t;
-        }
-      }),
-    );
-  }
+//   function handleAddTodo(title) {
+//     setTodos([
+//       ...todos,
+//       {
+//         id: nextId++,
+//         title: title,
+//         done: false,
+//       },
+//     ]);
+//   }
+//   function handleChangeTodo(nextTodo) {
+//     setTodos(
+//       todos.map((t) => {
+//         if (t.id === nextTodo.id) {
+//           return nextTodo;
+//         } else {
+//           return t;
+//         }
+//       }),
+//     );
+//   }
 
-  function handleDeleteTodo(todoId) {
-    setTodos(todos.filter((t) => t.id !== todoId));
-  }
-  return (
-    <>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TaskList
-        todos={todos}
-        onChangeTodo={handleChangeTodo}
-        onDeleteTodo={handleDeleteTodo}
-      />
-    </>
-  );
-};
+//   function handleDeleteTodo(todoId) {
+//     setTodos(todos.filter((t) => t.id !== todoId));
+//   }
+//   return (
+//     <>
+//       <AddTodo onAddTodo={handleAddTodo} />
+//       <TaskList
+//         todos={todos}
+//         onChangeTodo={handleChangeTodo}
+//         onDeleteTodo={handleDeleteTodo}
+//       />
+//     </>
+//   );
+// };
+
+// import React, {useState} from "react";
+
+// export default function ToggleText () {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   return(
+//     <div style={{textAlign:"center", backgroundColor:"cyan", color:"yellowgreen"}}>
+//       <button onClick={() => setIsVisible(!isVisible)}>{isVisible ? "Hide" : "Show"}Text</button>
+//       {isVisible && <p>This is the toggled text!</p>}
+//     </div>
+//   );
+// };
+
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
+import Explanation from "./components/Explaination/Explaination";
+
+const App = () => {
+    return(
+      <div className="app">
+        <ThemeToggle />
+      </div>
+    )
+}
+
+export default App;
