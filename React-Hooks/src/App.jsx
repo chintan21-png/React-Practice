@@ -69,57 +69,57 @@
 // // // }
 // // // export default ShoppingCart;
 
-import { useState } from "react";
-import AddTodo from "./components/AddTodo";
-import TaskList from "./components/TaskList";
+// import { useState } from "react";
+// import AddTodo from "./components/AddTodo";
+// import TaskList from "./components/TaskList";
 
-let nextId = 3;
+// let nextId = 3;
 
-const initialTodo = [
-  { id: 0, title: "Buy Milk", done: false },
-  { id: 1, title: "Go to Market", done: true },
-  { id: 2, title: "Back to Home", done: false },
-];
+// const initialTodo = [
+//   { id: 0, title: "Buy Milk", done: false },
+//   { id: 1, title: "Go to Market", done: true },
+//   { id: 2, title: "Back to Home", done: false },
+// ];
 
-export default function TaskApp() {
-  const [todos, setTodos] = useState(initialTodo);
+// export default function TaskApp() {
+//   const [todos, setTodos] = useState(initialTodo);
 
-  function handleAddTodo(title) {
-    setTodos([
-      ...todos,
-      {
-        id: nextId++,
-        title: title,
-        done: false,
-      },
-    ]);
-  }
-  function handleChangeTodo(nextTodo) {
-    setTodos(
-      todos.map((t) => {
-        if (t.id === nextTodo.id) {
-          return nextTodo;
-        } else {
-          return t;
-        }
-      }),
-    );
-  }
+//   function handleAddTodo(title) {
+//     setTodos([
+//       ...todos,
+//       {
+//         id: nextId++,
+//         title: title,
+//         done: false,
+//       },
+//     ]);
+//   }
+//   function handleChangeTodo(nextTodo) {
+//     setTodos(
+//       todos.map((t) => {
+//         if (t.id === nextTodo.id) {
+//           return nextTodo;
+//         } else {
+//           return t;
+//         }
+//       }),
+//     );
+//   }
 
-  function handleDeleteTodo(todoId) {
-    setTodos(todos.filter((t) => t.id !== todoId));
-  }
-  return (
-    <>
-      <AddTodo onAddTodo={handleAddTodo} />
-      <TaskList
-        todos={todos}
-        onChangeTodo={handleChangeTodo}
-        onDeleteTodo={handleDeleteTodo}
-      />
-    </>
-  );
-};
+//   function handleDeleteTodo(todoId) {
+//     setTodos(todos.filter((t) => t.id !== todoId));
+//   }
+//   return (
+//     <>
+//       <AddTodo onAddTodo={handleAddTodo} />
+//       <TaskList
+//         todos={todos}
+//         onChangeTodo={handleChangeTodo}
+//         onDeleteTodo={handleDeleteTodo}
+//       />
+//     </>
+//   );
+// };
 
 // // // import React, {useState} from "react";
 
@@ -217,3 +217,99 @@ export default function TaskApp() {
 
 // export default App
 
+//useEffect Hook
+
+//Users fetching example without useEffect Hook
+
+// import { useState } from "react";
+// function App() {
+//   const [users, setUsers] = useState([]);
+//   async function fetchUserData() {
+//     const response = await fetch("https://api.github.com/users");
+//     const data = await response.json();
+//     setUsers(data);
+//     //console.log("hello");
+//   }
+
+//   fetchUserData();
+  
+//   return(
+//     <>
+//       <h1>Github User</h1>
+//       <div className="flex justify-center items-center flex-wrap gap-2.5">
+//         {users.map((user) => (
+//           <img src={user.avatar_url} height="100px" width="100px" />
+//         ))}
+//       </div>
+//     </>
+//   )
+// }
+
+// export default App;
+
+//Users fetching example with useEffect Hook
+
+import { useState, useEffect } from "react";
+
+// function App() {
+//   const [users, setUsers] = useState([]);
+//   const [count, setCount] = useState(30);
+  
+//   useEffect(() => {
+//     async function fetchUserData() {
+//       const response = await fetch(`https://api.github.com/users?per_page=${count}`);
+//       const data = await response.json();
+//       setUsers(data);
+//       console.log("hello");
+//     }
+//     fetchUserData();
+//   }, [count]);
+
+//   return (
+//     <>
+//       <h1>Github User</h1>
+//       <input type="number" value={count} onChange={(e) => setCount(e.target.value)}></input>
+//       <div className="flex justify-center items-center flex-wrap gap-2.5">
+//         {users.map((user) => (
+//           <img src={user.avatar_url} height="100px" width="100px" key={user.login} />
+//         ))}
+//       </div>
+//     </>
+//   );
+// }
+
+// export default App;
+
+//Create a clock component that displays the current time and updates every second using useEffect Hook using TailwindCss.
+
+function Clock() {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    if(!show) {
+      return;
+    };
+    const intervalId = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+      console.log("Time updated");
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [show]);
+
+  return (
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="text-4xl font-bold text-blue-500 bg-white p-10 rounded-lg shadow-lg">
+        <button onClick={() => setShow(!show)} className="ml-4 bg-blue-500 text-white py-2 px-4 rounded">
+          {show ? "Hide" : "Show"}
+        </button>
+        {
+          show && <h1>Current Time : {time}</h1>
+        }
+      </div>
+    </div>
+  );
+}
+
+export default Clock;
