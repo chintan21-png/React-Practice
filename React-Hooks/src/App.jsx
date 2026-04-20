@@ -316,36 +316,110 @@
 
 //Create a simple counter component that increments the count every second using useEffect Hook and displays the count on the screen.
 
+// import { useState, useEffect } from "react";
+
+// function Counter() {
+//   const [count, setCount] = useState(0);
+//   const [show, setShow] = useState(true);
+
+//   useEffect(() => {
+//     if(!show) {
+//       return;
+//     }
+//     const intervalId = setInterval(() => {
+//       setCount(prevCount => prevCount + 1);
+//       console.log("Count updated");
+//     }, 1000);
+
+//     return () => clearInterval(intervalId);
+//   }, [show]);
+
+//   return (
+//     <div className="flex justify-center items-center h-screen bg-gray-100">
+//       <div className="text-4xl font-bold text-green-500 bg-white p-10 rounded-lg shadow-lg">
+//         <button onClick={() => setShow(!show)} className="ml-4 bg-green-500 text-white py-2 px-4 rounded">
+//           {show ? "Hide" : "Show"}
+//         </button>
+//         {
+//           show && <h1>Count : {count}</h1>
+//         }
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Counter;
+
+//useEffect mounting and unmounting example theory
+
+// useEffect(() => {
+//   console.log("Component mounted");
+
+//   return () => {
+//     console.log("Component unmounted");
+//   };
+// }, []);
+
+//In the above code, the useEffect hook is used to log a message when the component is mounted and another message when the component is unmounted. The empty dependency array ([]) ensures that the effect runs only once when the component is first rendered and the cleanup function runs when the component is removed from the DOM.       
+
+//what is mounting and unmounting in react?
+
+//Mounting in React refers to the process of creating and inserting a component into the DOM for the first time. When a component is mounted, it goes through a series of lifecycle methods (like constructor, render, componentDidMount) that allow you to set up the component's state, fetch data, or perform any necessary initialization.
+
+//Unmounting in React refers to the process of removing a component from the DOM. When a component is unmounted, it goes through lifecycle methods (like componentWillUnmount) that allow you to clean up any resources, cancel timers, or perform any necessary cleanup before the component is removed from the DOM.
+
+//In summary, mounting is the process of creating and inserting a component into the DOM, while unmounting is the process of removing a component from the DOM.
+
+//In functional components, the useEffect hook can be used to handle both mounting and unmounting logic. By providing an empty dependency array ([]) to useEffect, you can ensure that the effect runs only once when the component is mounted, and the cleanup function will run when the component is unmounted.
+
 import { useState, useEffect } from "react";
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  const [show, setShow] = useState(true);
+function App() {
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if(!show) {
-      return;
-    }
-    const intervalId = setInterval(() => {
-      setCount(prevCount => prevCount + 1);
-      console.log("Count updated");
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [show]);
-
-  return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="text-4xl font-bold text-green-500 bg-white p-10 rounded-lg shadow-lg">
-        <button onClick={() => setShow(!show)} className="ml-4 bg-green-500 text-white py-2 px-4 rounded">
-          {show ? "Hide" : "Show"}
-        </button>
-        {
-          show && <h1>Count : {count}</h1>
+    useEffect(() => {
+        async function fetchUserData() {
+            try {
+                const response = await fetch("https://api.github.com/users");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch user data");
+                }
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
         }
-      </div>
-    </div>
-  );
+        fetchUserData();
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
+
+    return (
+        <>
+            <h1>Github Users</h1>
+            <div className="flex justify-center items-center flex-nowrap gap-2.5">
+                <ul>
+                    {user.map((user) => (
+                        <li key={user.id}>
+                            {/* <img src={user.avatar_url} alt={user.login} height="100px" width="100px" /> */}
+                            {user.login}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
+    );  
 }
 
-export default Counter;
+export default App;
