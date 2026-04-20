@@ -375,7 +375,7 @@
 import { useState, useEffect } from "react";
 
 function App() {
-    const [user, setUser] = useState([]);
+    const [users, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -410,7 +410,7 @@ function App() {
             <h1>Github Users</h1>
             <div className="flex justify-center items-center flex-nowrap gap-2.5">
                 <ul>
-                    {user.map((user) => (
+                    {users.map((user) => (
                         <li key={user.id}>
                             {/* <img src={user.avatar_url} alt={user.login} height="100px" width="100px" /> */}
                             {user.login}
@@ -423,3 +423,4 @@ function App() {
 }
 
 export default App;
+
