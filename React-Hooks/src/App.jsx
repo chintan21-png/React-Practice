@@ -372,54 +372,87 @@
 
 //In functional components, the useEffect hook can be used to handle both mounting and unmounting logic. By providing an empty dependency array ([]) to useEffect, you can ensure that the effect runs only once when the component is mounted, and the cleanup function will run when the component is unmounted.
 
+// import { useState, useEffect } from "react";
+
+// function App() {
+//     const [users, setUsers] = useState([]);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//         async function fetchUserData() {
+//             try {
+//                 const response = await fetch("https://api.github.com/users");
+//                 if (!response.ok) {
+//                     throw new Error("Failed to fetch user data");
+//                 }
+//                 const data = await response.json();
+//                 setUsers(data);
+//             } catch (error) {
+//                 setError(error.message);
+//             } finally {
+//                 setLoading(false);
+//             }
+//         }
+//         fetchUserData();
+//     }, []);
+
+//     if (loading) {
+//         return <p>Loading...</p>;
+//     }
+
+//     if (error) {
+//         return <p>Error: {error}</p>;
+//     }
+
+//     return (
+//         <>
+//             <h1>Github Users</h1>
+//             <div className="flex justify-center items-center flex-nowrap gap-2.5">
+//                 <ul>
+//                     {users.map((user) => (
+//                         <li key={user.id}>
+//                             {/* <img src={user.avatar_url} alt={user.login} height="100px" width="100px" /> */}
+//                             {user.login}
+//                         </li>
+//                     ))}
+//                 </ul>
+//             </div>
+//         </>
+//     );  
+// };
+// export default App;
+
+
 import { useState, useEffect } from "react";
 
 function App() {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function fetchUserData() {
-            try {
-                const response = await fetch("https://api.github.com/users");
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user data");
-                }
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchUserData();
-    }, []);
-
-    if (loading) {
-        return <p>Loading...</p>;
+  const [users, setUsers] = useState([]);
+  const [count, setCount] = useState(30);
+  
+  useEffect(() => {
+    async function fetchUserData() {
+      console.log("Fetching user data...");  
+      const response = await fetch(`https://api.github.com/users?per_page=${count}`);
+      const data = await response.json();
+      setUsers(data);
+      console.log("hello");
     }
+    fetchUserData();
+  }, [count]);
 
-    if (error) {
-        return <p>Error: {error}</p>;
-    }
-
-    return (
-        <>
-            <h1>Github Users</h1>
-            <div className="flex justify-center items-center flex-nowrap gap-2.5">
-                <ul>
-                    {users.map((user) => (
-                        <li key={user.id}>
-                            {/* <img src={user.avatar_url} alt={user.login} height="100px" width="100px" /> */}
-                            {user.login}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
-    );  
+  return (
+    <>
+      <h1>Github User</h1>
+      <input type="number" value={count} onChange={(e) => setCount(e.target.value)}></input>
+      <div className="flex justify-center items-center flex-wrap gap-2.5">
+        {users.map((user) => (
+          <img src={user.avatar_url} height="100px" width="100px" key={user.login} />
+        ))}
+      </div>
+    </>
+  );
 };
+
 export default App;
 
