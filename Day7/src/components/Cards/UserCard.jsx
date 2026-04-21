@@ -2,7 +2,7 @@
 import React from "react";
 function UserCard({ user }) {
   return (
-    <div className="w-full mx-auto bg-gradient-to-r from-zinc-100 to-zinc-200 dark:from-[#000000] dark:to-[#0a0d37] border-zinc-300 dark:border-[#1b2c68a0] relative rounded-lg border shadow-lg p-4 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-500 dark:hover:border-blue-500">
+    <div className="w-full mx-auto bg-linear-to-r from-zinc-100 to-zinc-200 dark:from-[#000000] dark:to-[#0a0d37] border-zinc-300 dark:border-[#1b2c68a0] relative rounded-lg border shadow-lg p-4 cursor-pointer transition-transform transform hover:scale-105 hover:shadow-2xl hover:border-blue-500 dark:hover:border-blue-500">
       <div className="user-card">
         <img src={user.avatar_url} alt={user.login} className="avatar" />
         <div className="user-info">
