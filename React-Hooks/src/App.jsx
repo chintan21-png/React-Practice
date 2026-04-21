@@ -375,7 +375,7 @@
 import { useState, useEffect } from "react";
 
 function App() {
-    const [users, setUser] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -387,7 +387,7 @@ function App() {
                     throw new Error("Failed to fetch user data");
                 }
                 const data = await response.json();
-                setUser(data);
+                setUsers(data);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -420,7 +420,6 @@ function App() {
             </div>
         </>
     );  
-}
-
+};
 export default App;
 
