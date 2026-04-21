@@ -16,6 +16,7 @@ function UserCard({ user }) {
         >
           View Profile
         </a>
+        
       </div>
     </div>
   );
