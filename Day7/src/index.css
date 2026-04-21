@@ -13,5 +13,9 @@
   @apply text-red-500 text-center mt-4;
 }
 .user-card {
-  @apply p-4 border rounded mb-4 grid grid-cols-3 md:grid-cols-4 gap-4; 
+  @apply p-4 border rounded mb-4 grid grid-cols-3 md:grid-cols-4 gap-4 bg-purple-200 text-black; 
+}
+
+.profile-link {
+  @apply text-blue-800 hover:underline col-span-3 md:col-span-4;
 }
