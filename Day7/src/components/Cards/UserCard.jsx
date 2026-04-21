@@ -11,7 +11,6 @@ function UserCard({ user }) {
         <a
           href={user.html_url}
           target="_blank"
-          rel="noopener noreferrer"
           className="profile-link"
         >
           View Profile
