@@ -8,8 +8,7 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-
+    
     function handleSubmit(e) {
         e.preventDefault();
         setError('');
@@ -29,10 +28,10 @@ function SignUp() {
             return;
         }
         console.log({ name, email, password });
+        alert('Registration successful!');
         setName('');
         setEmail('');
-        setPassword('');
-        setSuccessMessage('Registration successful!');
+        setPassword('');    
     };
 };
 
