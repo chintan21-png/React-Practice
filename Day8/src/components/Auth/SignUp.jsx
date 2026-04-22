@@ -6,12 +6,13 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+ // const [isValid, setIsValid] = useState(false);
+  
   function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
-    if (!name) {
+    if (!name.trim()) {
       setError("Name is required");
       return;
     }
@@ -24,11 +25,14 @@ function SignUp() {
       setError("Password must be at least 6 characters");
       return;
     }
+   // setIsValid(true);
+
     console.log({ name, email, password });
     alert("Registration successful!");
     setName("");
     setEmail("");
     setPassword("");
+    // setIsValid(false);
   }
 
   return (
@@ -100,3 +104,4 @@ export default SignUp;
 
 //why e.preventDefault() is added first in the handleSubmit function?
 //e.preventDefault() is added first in the handleSubmit function to ensure that the default form submission behavior is prevented before any other logic is executed. This allows us to handle the form submission and validation without the page refreshing, which would otherwise interrupt our custom handling of the form data.
+
