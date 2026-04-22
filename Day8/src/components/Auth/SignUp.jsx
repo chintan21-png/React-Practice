@@ -1,5 +1,3 @@
-//i want to log the user input in the console when the form is submitted and also clear the form fields after submission. I also want to add a success message that says "Registration successful!" after the form is submitted successfully.
-
 import React, { useState } from "react";
 import { validateEmail } from "../../utils/validateEmail";
 
@@ -34,7 +32,6 @@ function SignUp() {
   }
 
   return (
-    <div className="fancy-container">
     <div className="min-h-screen flex items-center justify-center bg-gray-100 cursor-pointer transition duration-200 hover:bg-gray-200 p-4 rounded-lg">
       <div className="background-gradient form-card p-8 w-full max-w-md cursor-pointer transition duration-200 hover:shadow-lg hover:shadow-gray-300 rounded-lg">
         <h2 className="text-2xl font-bold mb-6 text-center text-white">
@@ -92,7 +89,6 @@ function SignUp() {
           </div>
         </form>
       </div>
-    </div>
     </div>
   );
 }
