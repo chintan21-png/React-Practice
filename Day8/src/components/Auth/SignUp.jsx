@@ -31,55 +31,71 @@ function SignUp() {
     setName("");
     setEmail("");
     setPassword("");
-  };
+  }
 
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 cursor-pointer transition duration-200 hover:bg-gray-200 p-4 rounded-lg">
-            <div className="form-card p-8 w-full max-w-md cursor-pointer transition duration-200 hover:shadow-lg hover:shadow-gray-300 rounded-lg">
-                <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-                {error && <p className="text-red-500 mb-4">{error}</p>}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block mb-1 font-medium">Name :</label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}   
-                            required={true}
-                            className="form-input w-full"
-                            placeholder="Enter your name"
-                        />
-                    </div>
-                    <div>
-                        <label className="block mb-1 font-medium">Email :</label>     
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required={true}
-                            className="form-input w-full"
-                            placeholder="example@email.com"
-                        />
-                    </div>
-                    <div>
-                        <label className="block mb-1 font-medium">Password :</label>
-                        <input  
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required={true}
-                            className="form-input w-full"
-                            placeholder="Enter your password"
-                        />
-                    </div>
-                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200 cursor-pointer">
-                        Sign Up
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
-};
+  return (
+    <div className="fancy-container">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 cursor-pointer transition duration-200 hover:bg-gray-200 p-4 rounded-lg">
+      <div className="background-gradient form-card p-8 w-full max-w-md cursor-pointer transition duration-200 hover:shadow-lg hover:shadow-gray-300 rounded-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">
+          Sign Up
+        </h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="mt-4">
+            <label for="name" className="block mb-1 font-medium text-white">
+              Name :
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required={true}
+              className="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md text-white"
+              placeholder="Enter your name"
+            />
+          </div>
+          <div className="mt-4">
+            <label for="email" className="block mb-1 font-medium text-white">
+              Email :
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required={true}
+              className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+              placeholder="example@email.com"
+            />
+          </div>
+          <div className="mt-4">
+            <label for="password" className="block mb-1 font-medium text-white">
+              Password :
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required={true}
+              className="mt-1 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white"
+              placeholder="Enter your password"
+            />
+          </div>
+          <div className="justify-center">
+            <button class="bg-cyan-950 text-cyan-400 border border-cyan-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group w-full mt-4">
+              <span class="bg-cyan-400 shadow-cyan-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  );
+}
 
 export default SignUp;
 
@@ -88,4 +104,3 @@ export default SignUp;
 
 //why e.preventDefault() is added first in the handleSubmit function?
 //e.preventDefault() is added first in the handleSubmit function to ensure that the default form submission behavior is prevented before any other logic is executed. This allows us to handle the form submission and validation without the page refreshing, which would otherwise interrupt our custom handling of the form data.
-
