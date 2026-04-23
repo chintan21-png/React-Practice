@@ -41,7 +41,7 @@ function SignUp() {
         <h2 className="text-2xl font-bold mb-6 text-center text-white">
           Sign Up
         </h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && <p className="text-red-800 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="mt-4">
             <label for="name" className="block mb-1 font-medium text-white">
