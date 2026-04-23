@@ -1,11 +1,8 @@
-import React from "react";
-
+import UserList from "./components/UserList";
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div className="App">
+      <UserList />
     </div>
   );
 }
