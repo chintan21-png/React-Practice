@@ -7,7 +7,8 @@ const formSchema = z.object({
     .string()
     .trim()
     .min(3, "Name can not be empty")
-    .max(20, "Name can not be more than 20 characters"),
+    .max(20, "Name can not be more than 20 characters")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
   age: z
     .number()
     .min(18, "Age must be at least 18")
