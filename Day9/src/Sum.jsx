@@ -15,8 +15,8 @@ const Sum = React.memo((number) => {
 
     return(
         <>
-            <h1>This is out Math Library</h1>
-            <h2>Sum: {total}</h2>
+            {/* <h1>This is out Math Library</h1>
+            <h2>Sum: {total}</h2> */}
         </>
     );
 })

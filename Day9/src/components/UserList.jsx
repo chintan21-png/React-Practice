@@ -1,7 +1,5 @@
 // //https://dummyjson.com/users
 
-// debounce search input, add retry button in error state
-
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import UserCard from "./Card/UserCard";
@@ -61,7 +59,7 @@ function UserList() {
   return (
     <>
       <h1 class="mb-4 text-3xl font-bold text-heading md:text-5xl lg:text-6xl text-center bg-gray-700">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+        <span class="text-transparent bg-clip-text bg-linear-to-r to-emerald-600 from-sky-400">
           Users
         </span>{" "}
         List :
