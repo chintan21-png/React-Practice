@@ -1,24 +1,24 @@
-import React from "react";
+// import React from "react";
 
-const Sum = React.memo((number) => {
-     function calculateSum() {
-        let sum = 0;
+// const Sum = React.memo((number) => {
+//      function calculateSum() {
+//         let sum = 0;
 
-        for (let i=0; i <= number; i++) {
-            sum+=i;
-        }
-        return sum;
-    }
+//         for (let i=0; i <= number; i++) {
+//             sum+=i;
+//         }
+//         return sum;
+//     }
 
-    const total = calculateSum();
-    console.log("Sum render")
+//    // const total = calculateSum();
+//     console.log("Sum render")
 
-    return(
-        <>
-            {/* <h1>This is out Math Library</h1>
-            <h2>Sum: {total}</h2> */}
-        </>
-    );
-})
+//     return(
+//         <>
+//             {/* <h1>This is out Math Library</h1>
+//             <h2>Sum: {total}</h2> */}
+//         </>
+//     );
+// })
 
-export default Sum;
+// export default Sum;
