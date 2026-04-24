@@ -48,9 +48,9 @@ function UserList() {
     let timeoutId;
     return function (...args) {
       clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            func.apply(this, args);
-        }, delay);
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
     };
   }
 
@@ -60,7 +60,12 @@ function UserList() {
 
   return (
     <>
-      <h1 class="mb-4 text-3xl font-bold text-heading md:text-5xl lg:text-6xl text-center bg-gray-700"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Users</span> List :</h1>
+      <h1 class="mb-4 text-3xl font-bold text-heading md:text-5xl lg:text-6xl text-center bg-gray-700">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+          Users
+        </span>{" "}
+        List :
+      </h1>
 
       <input
         type="text"
@@ -83,8 +88,7 @@ function UserList() {
         {filteredUsers.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
-        {filteredUsers.length === 0 && <p>No results found</p>
-} 
+        {filteredUsers.length === 0 && <p>No results found</p>}
       </div>
     </>
   );
