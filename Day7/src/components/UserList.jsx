@@ -44,7 +44,7 @@ function UserList() {
       <input
         type="number"
         value={count}
-        onChange={(e) => setCount(Number(e.target.value))}
+        onChange={(e) => setCount(e.target.value)}
         className="mb-4 p-2 border rounded w-full md:w-1/4 mx-auto text-center text-lg font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-amber-500 text-white placeholder-gray-200 focus:bg-amber-600 focus:text-white transition-colors duration-300"
         placeholder="Number of users to fetch"
       ></input>

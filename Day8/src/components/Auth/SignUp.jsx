@@ -99,50 +99,50 @@
 
 // export default SignUp;
 
-// //what is e.preventDefault() in the handleSubmit function?
-// //e.preventDefault() is a method that prevents the default action of the form submission, which is to refresh the page. By calling this method, we can handle the form submission in our own way without causing a page reload.
+// // //what is e.preventDefault() in the handleSubmit function?
+// // //e.preventDefault() is a method that prevents the default action of the form submission, which is to refresh the page. By calling this method, we can handle the form submission in our own way without causing a page reload.
 
-// //why e.preventDefault() is added first in the handleSubmit function?
-// //e.preventDefault() is added first in the handleSubmit function to ensure that the default form submission behavior is prevented before any other logic is executed. This allows us to handle the form submission and validation without the page refreshing, which would otherwise interrupt our custom handling of the form data.
+// // //why e.preventDefault() is added first in the handleSubmit function?
+// // //e.preventDefault() is added first in the handleSubmit function to ensure that the default form submission behavior is prevented before any other logic is executed. This allows us to handle the form submission and validation without the page refreshing, which would otherwise interrupt our custom handling of the form data.
 
-//React From using zod validation library
+// //React From using zod validation library
 
-import { useState } from "react";
+// // import { useState } from "react";
 
-function SignUp() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [password, setPassword] = useState("");
+// // function SignUp() {
+// //   const [name, setName] = useState("");
+// //   const [age, setAge] = useState("");
+// //   const [password, setPassword] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log({ name, age, password });
-    alert("Registration successful!");
-    setName("");
-    setAge("");
-    setPassword("");
-  }
+// //   function handleSubmit(e) {
+// //     e.preventDefault();
+// //     console.log({ name, age, password });
+// //     alert("Registration successful!");
+// //     setName("");
+// //     setAge("");
+// //     setPassword("");
+// //   }
 
-  console.log("Rendering SignUp component");
+// //   console.log("Rendering SignUp component");
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
-        </div>
+// //   return (
+// //     <>
+// //       <form onSubmit={handleSubmit}>
+// //         <div>
+// //           <input type="text" value={name} onChange={(e) => setName(e.target.value)}></input>
+// //         </div>
 
-        <div>
-          <input type="number" value={age} onChange={(e) => setAge(e.target.value)}></input>
-        </div>
+// //         <div>
+// //           <input type="number" value={age} onChange={(e) => setAge(e.target.value)}></input>
+// //         </div>
 
-        <div>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>  
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </>
-  );
-};
+// //         <div>
+// //           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>  
+// //         </div>
+// //         <button type="submit">Submit</button>
+// //       </form>
+// //     </>
+// //   );
+// // };
 
-export default SignUp;
+// // export default SignUp;
