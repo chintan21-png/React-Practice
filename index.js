@@ -38,4 +38,4 @@
 
 const nums = [1,2,4,5,6];
 const sum = nums.reduce((acc,curr) => acc + curr, 0);
-console.log(sum)
+console.log(sum);
