@@ -7,6 +7,7 @@ import Modal from "./Modal";
 const STORAGE_KEY = "kanban-data";
 const Board = () => {
   //const [showForm, setShowForm] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [columns, setColumns] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -38,6 +39,19 @@ const Board = () => {
       },
     }));
   };
+  const updateTask = (updatedTask) => {
+    setColumns((prev) => {
+      const newColumns = { ...prev };
+
+      Object.keys(newColumns).forEach((colId) => {
+        newColumns[colId].items = newColumns[colId].items.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task,
+        );
+      });
+
+      return newColumns;
+    });
+  };
   const deleteTask = (columnId, taskId) => {
     setColumns((prev) => ({
       ...prev,
@@ -57,17 +71,34 @@ const Board = () => {
       </button>
       <Modal
         isOpen={isTaskModalOpen}
-        onClose={() => setIsTaskModalOpen(false)}
-        title="Add New Task"
+        onClose={() => {
+          setIsTaskModalOpen(false);
+          setEditingTask(null);
+        }}
+        title={editingTask ? "Edit Task" : "Add Task"}
       >
         <TaskForm
-          onAddTask={(data) => {
-            addTask(data);
+          initialData={editingTask}
+          onSubmit={(data) => {
+            if (editingTask) {
+              updateTask({ ...editingTask, ...data });
+            } else {
+              addTask(data);
+            }
+
             setIsTaskModalOpen(false);
+            setEditingTask(null);
           }}
         />
       </Modal>
-      <Columns columns={columns} onDeleteTask={deleteTask} />
+      <Columns
+        columns={columns}
+        onDeleteTask={deleteTask}
+        onEditTask={(task) => {
+          setEditingTask(task);
+          setIsTaskModalOpen(true);
+        }}
+      />
     </div>
   );
 };

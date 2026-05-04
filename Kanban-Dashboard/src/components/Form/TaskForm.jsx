@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 //import Modal from "../../Modal";
 
 const taskSchema = z.object({
@@ -21,23 +22,40 @@ const taskSchema = z.object({
   }),
 });
 
-function TaskForm({ onAddTask }) {
+function TaskForm({ onSubmit, initialData }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(taskSchema),
+    defaultValues: initialData || {
+      title: "",
+      description: "",
+      priority: "",
+      dueDate: "",
+    },
   });
 
+  useEffect(() => {
+    if (initialData) {
+      reset(initialData);
+    }
+  }, [initialData, reset]);
+
   function submitForm(data) {
-    onAddTask(data);
+    onSubmit(data);
   }
   return (
     <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
       <div>
-        <label htmlFor="title" className="text-sm font-medium">Task Title</label>
-        <input id="title" type="text"
+        <label htmlFor="title" className="text-sm font-medium">
+          Task Title
+        </label>
+        <input
+          id="title"
+          type="text"
           {...register("title")}
           className="w-full border p-2 rounded mt-1"
         />
@@ -47,7 +65,9 @@ function TaskForm({ onAddTask }) {
       </div>
 
       <div>
-        <label htmlFor="description" lassName="text-sm font-medium">Description</label>
+        <label htmlFor="description" className="text-sm font-medium">
+          Description
+        </label>
         <textarea
           id="description"
           {...register("description")}
@@ -59,7 +79,9 @@ function TaskForm({ onAddTask }) {
       </div>
 
       <div>
-        <label htmlFor="priority" className="text-sm font-medium">Priority</label>
+        <label htmlFor="priority" className="text-sm font-medium">
+          Priority
+        </label>
         <select
           id="priority"
           {...register("priority")}
@@ -76,7 +98,9 @@ function TaskForm({ onAddTask }) {
       </div>
 
       <div>
-        <label htmlFor="duedate" className="text-sm font-medium">Due Date</label>
+        <label htmlFor="duedate" className="text-sm font-medium">
+          Due Date
+        </label>
         <input
           type="date"
           id="duedate"
@@ -99,10 +123,9 @@ function TaskForm({ onAddTask }) {
 
         <button
           type="submit"
-          className="px-3 py-1 bg-blue-600 text-white rounded cursor-pointer hover:scale-105 animate-bounce"
-          
+          className="px-3 py-1 bg-blue-600 text-white rounded cursor-pointer hover:scale-105"
         >
-          Add Task
+          {initialData ? "Update Task" : "Add Task"}
         </button>
       </div>
     </form>

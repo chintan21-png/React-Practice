@@ -1,7 +1,7 @@
 //import React from "react";
 import TaskCard from "../Cards/TaskCard";
 
-const Columns = ({ columns, onDeleteTask}) => {
+const Columns = ({ columns, onDeleteTask , onEditTask}) => {
   return (
     <div className="flex gap-6 p-6 overflow-x-auto">
       {Object.entries(columns).map(([id, column]) => (
@@ -19,7 +19,7 @@ const Columns = ({ columns, onDeleteTask}) => {
             </p>
           ) : (
             column.items.map((task) => (
-              <TaskCard key={task.id} task={task} onDeleteTask={onDeleteTask} columnId={id} />
+              <TaskCard key={task.id} task={task} onDeleteTask={onDeleteTask} columnId={id} onEditTask={onEditTask} />
             ))
           )}
         </div>

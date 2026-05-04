@@ -1,14 +1,12 @@
 //import React from "react";
 
-const TaskCard = ({ task, onDeleteTask, columnId }) => {
+const TaskCard = ({ task, onDeleteTask, columnId , onEditTask}) => {
   return (
     <div className="bg-white p-3 rounded-lg mb-3 shadow hover:shadow-md transition">
       <h4 className="font-semibold text-sm">{task.title}</h4>
 
       {task.description && (
-        <p className="text-xs text-gray-600 mt-1">
-          {task.description}
-        </p>
+        <p className="text-xs text-gray-600 mt-1">{task.description}</p>
       )}
 
       <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
@@ -17,8 +15,8 @@ const TaskCard = ({ task, onDeleteTask, columnId }) => {
             task.priority === "high"
               ? "bg-red-500"
               : task.priority === "medium"
-              ? "bg-yellow-500"
-              : "bg-green-500"
+                ? "bg-yellow-500"
+                : "bg-green-500"
           }`}
         >
           {task.priority}
@@ -26,6 +24,12 @@ const TaskCard = ({ task, onDeleteTask, columnId }) => {
 
         <span>{task.dueDate}</span>
       </div>
+      <button
+        onClick={() => onEditTask(task)}
+        className="text-blue-500 text-xs mt-1 hover:underline"
+      >
+        Edit
+      </button>
       <button
         onClick={() => onDeleteTask(columnId, task.id)}
         className="mt-2 text-red-500 text-xs hover:underline"
