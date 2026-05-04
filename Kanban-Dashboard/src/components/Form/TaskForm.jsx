@@ -35,7 +35,7 @@ function TaskForm() {
   });
 
   function submitForm(data) {
-    console.log("Task Data:", data);
+    localStorage.setItem("Task Data:", data);
   }
 
   return (

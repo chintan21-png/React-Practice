@@ -1,29 +1,20 @@
-import TaskForm from "./components/Form/TaskForm";
-import TaskColumn from "./components/Columns/TaskColumns";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Dashboard from "./Dashboard";
-import { TaskProvider, useTaskContext } from "./components/Context/TaskContext";
+import Board from "./Board";
 
-function Board() {
-  const { columns } = useTaskContext();
+//import React from 'react'
 
+const App = () => {
   return (
-    <div className="flex">
-      {columns.map((col) => (
-        <TaskColumn key={col.id} column={col} />
-      ))}
+    <div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Board />}></Route>
+                <Route path="/dashboard" element={<Dashboard />}></Route>
+            </Routes>
+        </Router>
     </div>
   );
-}
-
-function App() {
-  return (
-    <TaskProvider>
-      <h1>Kanban Board</h1>
-      <Dashboard />
-      <TaskForm />
-      <Board />
-    </TaskProvider>
-  );
-}
+};
 
 export default App;
