@@ -86,6 +86,7 @@ const Board = () => {
       },
     }));
   };
+
   return (
     <div>
       <input
