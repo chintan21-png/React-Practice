@@ -15,7 +15,7 @@ const Columns = ({ columns, onDeleteTask , onEditTask}) => {
 
           {column.items.length === 0 ? (
             <p className="text-gray-500 text-sm text-center">
-              No tasks
+              No Matching tasks
             </p>
           ) : (
             column.items.map((task) => (

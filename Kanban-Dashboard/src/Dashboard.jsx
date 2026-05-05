@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "kanban-data";

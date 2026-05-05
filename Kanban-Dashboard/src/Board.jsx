@@ -9,6 +9,8 @@ const Board = () => {
   //const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filterPriority, setFilterPriority] = useState("");
   const [columns, setColumns] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved
@@ -20,6 +22,29 @@ const Board = () => {
           done: { name: "Done", items: [] },
         };
   });
+  const filteredColumns = Object.fromEntries(
+    Object.entries(columns).map(([colId, col]) => {
+      const filteredItems = col.items.filter((task) => {
+        const matchesSearch =
+          task.title.toLowerCase().includes(search.toLowerCase()) ||
+          task.description?.toLowerCase().includes(search.toLowerCase());
+
+        const matchesPriority = filterPriority
+          ? task.priority === filterPriority
+          : true;
+
+        return matchesSearch && matchesPriority;
+      });
+
+      return [
+        colId,
+        {
+          ...col,
+          items: filteredItems,
+        },
+      ];
+    }),
+  );
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(columns));
@@ -63,6 +88,24 @@ const Board = () => {
   };
   return (
     <div>
+      <input
+        type="text"
+        value={search}
+        placeholder="Search for Task..."
+        onChange={(e) => setSearch(e.target.value)}
+        className="border px-4 py-2 rounded-md w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      ></input>
+      <select
+        value={filterPriority}
+        onChange={(e) => setFilterPriority(e.target.value)}
+        className="border px-3 py-2 rounded-md"
+      >
+        <option value="">All</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
       <button
         onClick={() => setIsTaskModalOpen(true)}
         className="bg-blue-600 text-white px-4 py-2 rounded-md mb-4 font-bold text-center hover:bg-blue-700 cursor-pointer hover:scale-105"
@@ -92,7 +135,7 @@ const Board = () => {
         />
       </Modal>
       <Columns
-        columns={columns}
+        columns={filteredColumns}
         onDeleteTask={deleteTask}
         onEditTask={(task) => {
           setEditingTask(task);
