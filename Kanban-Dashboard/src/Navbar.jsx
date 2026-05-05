@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md px-6 py-3 flex justify-between items-center">
-      <h1 className="text-xl font-bold text-blue-600">
+      <h1 className="text-xl font-bold text-indigo-600">
         Kanban Dashboard
       </h1>
 

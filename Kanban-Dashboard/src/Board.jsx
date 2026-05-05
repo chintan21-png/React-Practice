@@ -11,6 +11,7 @@ const Board = () => {
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [filterPriority, setFilterPriority] = useState("");
+  const [newColumnName, setNewColumnName] = useState("");
   const [columns, setColumns] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved
@@ -86,6 +87,29 @@ const Board = () => {
       },
     }));
   };
+  const addColumn = () => {
+    if (!newColumnName.trim()) return;
+
+    const newId =
+      newColumnName.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now();
+
+    setColumns((prev) => ({
+      ...prev,
+      [newId]: {
+        name: newColumnName,
+        items: [],
+      },
+    }));
+
+    setNewColumnName("");
+  };
+  const deleteColumn = (columnId) => {
+    setColumns((prev) => {
+      const newCols = { ...prev };
+      delete newCols[columnId];
+      return newCols;
+    });
+  };
 
   return (
     <div>
@@ -94,12 +118,12 @@ const Board = () => {
         value={search}
         placeholder="Search for Task..."
         onChange={(e) => setSearch(e.target.value)}
-        className="border px-4 py-2 rounded-md w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="border px-4 py-2 rounded-md w-80 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
       ></input>
       <select
         value={filterPriority}
         onChange={(e) => setFilterPriority(e.target.value)}
-        className="border px-3 py-2 rounded-md"
+        className="border px-3 py-2 rounded-md ml-1"
       >
         <option value="">All</option>
         <option value="low">Low</option>
@@ -109,10 +133,25 @@ const Board = () => {
 
       <button
         onClick={() => setIsTaskModalOpen(true)}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md mb-4 font-bold text-center hover:bg-blue-700 cursor-pointer hover:scale-105"
+        className="bg-blue-600 text-white px-4 py-2 rounded-md mb-4 font-bold text-center hover:bg-blue-700 cursor-pointer hover:scale-105 ml-1"
       >
         + Add Task
       </button>
+      <input
+        type="text"
+        placeholder="New column name"
+        value={newColumnName}
+        onChange={(e) => setNewColumnName(e.target.value)}
+        className="border px-3 py-2 rounded-md ml-60"
+      />
+
+      <button
+        onClick={addColumn}
+        className="bg-green-600 text-white px-4 py-2 rounded-md ml-1.5"
+      >
+        + Add Column
+      </button>
+
       <Modal
         isOpen={isTaskModalOpen}
         onClose={() => {
@@ -138,6 +177,7 @@ const Board = () => {
       <Columns
         columns={filteredColumns}
         onDeleteTask={deleteTask}
+        onDeleteColumn={deleteColumn}
         onEditTask={(task) => {
           setEditingTask(task);
           setIsTaskModalOpen(true);

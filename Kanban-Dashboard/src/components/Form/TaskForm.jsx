@@ -48,65 +48,83 @@ function TaskForm({ onSubmit, initialData }) {
     onSubmit(data);
   }
   return (
-    <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
-      <div>
-        <label htmlFor="title" className="text-sm font-medium">
-          Task Title
-        </label>
+    <form onSubmit={handleSubmit(submitForm)} className="max-w-md mx-auto">
+      <div className="relative z-0 w-full mb-5 group">
         <input
           id="title"
           type="text"
           {...register("title")}
-          className="w-full border p-2 rounded mt-1"
+          placeholder=" "
+          className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
         />
+        <label
+          htmlFor="title"
+          className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          Task Title
+        </label>
         {errors.title && (
           <p className="text-red-500 text-xs">{errors.title.message}</p>
         )}
       </div>
 
-      <div>
-        <label htmlFor="description" className="text-sm font-medium">
-          Description
-        </label>
+      <div className="relative z-0 w-full mb-5 group">
         <textarea
           id="description"
           {...register("description")}
-          className="w-full border p-2 rounded mt-1"
+          className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
+          placeholder=" "
         />
+        <label
+          htmlFor="description"
+          className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          Description
+        </label>
+
         {errors.description && (
           <p className="text-red-500 text-xs">{errors.description.message}</p>
         )}
       </div>
 
-      <div>
-        <label htmlFor="priority" className="text-sm font-medium">
-          Priority
-        </label>
+      <div className="relative z-0 w-full mb-5 group">
         <select
           id="priority"
+          placeholder=" "
           {...register("priority")}
-          className="w-full border p-2 rounded mt-1"
+          className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
         >
           <option value="">Select Priority</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
+        <label
+          htmlFor="priority"
+          className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          Priority
+        </label>
         {errors.priority && (
           <p className="text-red-500 text-xs">{errors.priority.message}</p>
         )}
       </div>
 
-      <div>
-        <label htmlFor="duedate" className="text-sm font-medium">
-          Due Date
-        </label>
+      <div className="relative z-0 w-full mb-5 group">
         <input
           type="date"
+          placeholder=" "
           id="duedate"
           {...register("dueDate")}
-          className="w-full border p-2 rounded mt-1"
+          className="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
         />
+        <label
+          htmlFor="duedate"
+          className="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+        >
+          Due Date
+        </label>
+
         {errors.dueDate && (
           <p className="text-red-500 text-xs">{errors.dueDate.message}</p>
         )}
