@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import TaskForm from "./components/Form/TaskForm";
 import Columns from "./components/Columns/Columns";
 import Modal from "./Modal";
@@ -7,6 +7,8 @@ import Modal from "./Modal";
 const STORAGE_KEY = "kanban-data";
 const Board = () => {
   //const [showForm, setShowForm] = useState(false);
+  const dragItem = useRef();
+  const dragColumn = useRef();
   const [editingTask, setEditingTask] = useState(null);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -111,6 +113,32 @@ const Board = () => {
     });
   };
 
+  const handleDrop = (toColumnId) => {
+    const task = dragItem.current;
+    const fromColumnId = dragColumn.current;
+
+    if (!task || !fromColumnId || fromColumnId === toColumnId) return;
+
+    setColumns((prev) => {
+      const source = prev[fromColumnId];
+      const target = prev[toColumnId];
+
+      return {
+        ...prev,
+
+        [fromColumnId]: {
+          ...source,
+          items: source.items.filter((t) => t.id !== task.id),
+        },
+
+        [toColumnId]: {
+          ...target,
+          items: [...target.items, task],
+        },
+      };
+    });
+  };
+
   return (
     <div>
       <input
@@ -174,10 +202,14 @@ const Board = () => {
           }}
         />
       </Modal>
+
       <Columns
         columns={filteredColumns}
         onDeleteTask={deleteTask}
         onDeleteColumn={deleteColumn}
+        dragItem={dragItem}
+        dragColumn={dragColumn}
+        onDropTask={handleDrop}
         onEditTask={(task) => {
           setEditingTask(task);
           setIsTaskModalOpen(true);
