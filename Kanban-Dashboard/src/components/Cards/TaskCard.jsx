@@ -1,7 +1,7 @@
 //import { useRef } from "react";
 
 //import React from "react";
-import RetroCard from "../RetroCard";
+//import RetroCard from "../RetroCard";
 const TaskCard = ({
   task,
   onDeleteTask,
@@ -23,14 +23,14 @@ const TaskCard = ({
   };
 
   return (
-    <RetroCard>
+    
     <div
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      className="text-center"
+      className="text-center cursor-pointer"
     >
-      <h4 className="ffont-mono text-lg font-bold mb-2">{task.title}</h4>
+      <h4 className="font-mono text-lg font-bold mb-2 text-pink-500">{task.title}</h4>
 
       {task.description && (
         <p className="font-mono text-sm text-gray-700 dark:text-gray-300">{task.description}</p>
@@ -53,18 +53,18 @@ const TaskCard = ({
       </div>
       <button
         onClick={() => onEditTask(task)}
-        className="text-white bg-blue-600 bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
+        className="text-white cursor-pointer bg-blue-600 bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
       >
         Edit
       </button>
       <button
         onClick={() => onDeleteTask(columnId, task.id)}
-        className="text-white bg-red-600 bg-danger box-border border border-transparent hover:bg-danger-strong focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none ml-2"
+        className="text-white cursor-pointer bg-red-600 bg-danger box-border border border-transparent hover:bg-danger-strong focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none ml-2"
       >
         Delete
       </button>
     </div>
-    </RetroCard>
+   
   );
 };
 
