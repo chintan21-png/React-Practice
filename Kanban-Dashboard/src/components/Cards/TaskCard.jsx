@@ -1,7 +1,26 @@
-//import { useRef } from "react";
+import { Trash2, Pencil, GripVertical, CalendarDays, Flag } from "lucide-react";
 
-//import React from "react";
-//import RetroCard from "../RetroCard";
+const priorityConfig = {
+  high: {
+    label: "High",
+    dot: "bg-red-500",
+    badge: "bg-red-50 text-red-600 ring-red-200",
+    icon: "text-red-500",
+  },
+  medium: {
+    label: "Medium",
+    dot: "bg-amber-400",
+    badge: "bg-amber-50 text-amber-600 ring-amber-200",
+    icon: "text-amber-500",
+  },
+  low: {
+    label: "Low",
+    dot: "bg-emerald-500",
+    badge: "bg-emerald-50 text-emerald-600 ring-emerald-200",
+    icon: "text-emerald-500",
+  },
+};
+
 const TaskCard = ({
   task,
   onDeleteTask,
@@ -10,6 +29,8 @@ const TaskCard = ({
   dragItem,
   dragContainer,
 }) => {
+  const priority = priorityConfig[task.priority] || priorityConfig.low;
+
   const handleDragStart = (e) => {
     // eslint-disable-next-line react-hooks/immutability
     dragItem.current = task;
@@ -23,48 +44,69 @@ const TaskCard = ({
   };
 
   return (
-    
     <div
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      className="text-center cursor-pointer"
+      className="group relative bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-200 cursor-grab active:cursor-grabbing"
     >
-      <h4 className="font-mono text-lg font-bold mb-2 text-pink-500">{task.title}</h4>
+      <div className="absolute top-3 right-3 text-slate-300 group-hover:text-slate-400 transition-colors">
+        <GripVertical size={14} />
+      </div>
 
-      {task.description && (
-        <p className="font-mono text-sm text-gray-700 dark:text-gray-300">{task.description}</p>
-      )}
+      <div
+        className={`absolute left-0 top-4 bottom-4 w-1 rounded-full ${priority.dot}`}
+      />
 
-      <div className="text-center space-y-4 mt-2">
-        <div
-          className={`font-mono text-2xl font-bold ${
-            task.priority === "high"
-              ? "bg-red-500"
-              : task.priority === "medium"
-                ? "bg-yellow-500"
-                : "bg-violet-800"
-          }`}
-        >
-          {task.priority}
+      <div className="pl-3">
+        <div className="flex items-center gap-1.5 mb-2">
+          <span
+            className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ring-1 ${priority.badge}`}
+          >
+            <Flag size={10} className={priority.icon} />
+            {priority.label}
+          </span>
         </div>
 
-        <div className="font-mono text-xs mb-2">{task.dueDate}</div>
+        <h4 className="text-sm font-semibold text-slate-800 leading-snug mb-1 pr-5">
+          {task.title}
+        </h4>
+
+        {task.description && (
+          <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-3">
+            {task.description}
+          </p>
+        )}
+
+        <div className="flex items-center justify-between mt-3">
+          {task.dueDate ? (
+            <div className="flex items-center gap-1 text-xs text-slate-400">
+              <CalendarDays size={11} />
+              <span>{task.dueDate}</span>
+            </div>
+          ) : (
+            <span />
+          )}
+
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => onEditTask(task)}
+              className="flex items-center justify-center w-7 h-7 rounded-lg bg-indigo-50 text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700 transition-colors duration-150"
+              title="Edit task"
+            >
+              <Pencil size={12} />
+            </button>
+            <button
+              onClick={() => onDeleteTask(columnId, task.id)}
+              className="flex items-center justify-center w-7 h-7 rounded-lg bg-red-50 text-red-400 hover:bg-red-100 hover:text-red-600 transition-colors duration-150"
+              title="Delete task"
+            >
+              <Trash2 size={12} />
+            </button>
+          </div>
+        </div>
       </div>
-      <button
-        onClick={() => onEditTask(task)}
-        className="text-white cursor-pointer bg-blue-600 bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none"
-      >
-        Edit
-      </button>
-      <button
-        onClick={() => onDeleteTask(columnId, task.id)}
-        className="text-white cursor-pointer bg-red-600 bg-danger box-border border border-transparent hover:bg-danger-strong focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none ml-2"
-      >
-        Delete
-      </button>
     </div>
-   
   );
 };
 
