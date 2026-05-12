@@ -1,11 +1,13 @@
 import React from "react";
-import SignUp from "./components/Auth/SignUp";
+import Todo from "./components/Todo";
+// import SignUp from "./components/Auth/SignUp";
 //import Form from "./components/Form";
 // import ZodForm from "./components/ZodForm";
 function App() {
   return (
-    <div>
-      <SignUp /> 
+    <div className="bg-stone-900 grid py-4 min-h-screen">
+      <Todo />
+      {/* <SignUp />  */}
       {/* <Form /> */}
       {/* <ZodForm /> */}
     </div>

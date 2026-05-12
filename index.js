@@ -36,6 +36,10 @@
 
 // main();
 
-const nums = [1,2,4,5,6];
-const sum = nums.reduce((acc,curr) => acc + curr, 0);
-console.log(sum);
+// const nums = [1,2,4,5,6];
+// const sum = nums.reduce((acc,curr) => acc + curr, 0);
+// console.log(sum);
+
+// const arr = [1,2,3];
+// const multiply = arr.reduce((acc,curr) => acc * curr, 1);
+// console.log(multiply);
