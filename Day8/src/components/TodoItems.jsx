@@ -23,6 +23,6 @@ const TodoItems = ({text, id, isComplete, deleteTodo, toggle, handleEdit}) => {
         </div>
     </div>
   )
-}
+};
 
 export default TodoItems
