@@ -3,7 +3,11 @@ import { ListTodo } from "lucide-react";
 import TodoItems from "./TodoItems";
 
 const Todo = () => {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(
+    localStorage.getItem("todoList")
+      ? JSON.parse(localStorage.getItem("todoList"))
+      : [],
+  );
   const inputRef = useRef(null);
 
   const add = () => {
@@ -22,24 +26,41 @@ const Todo = () => {
   };
 
   const deleteTodo = (id) => {
-     setTodoList((prev) => {
+    setTodoList((prev) => {
       return prev.filter((item) => item.id !== id);
     });
   };
 
+  const handleEdit = (id) => {
+    const newText = prompt("Enter new text:");
+
+    if (newText !== null) {
+      setTodoList((prev) => {
+        return prev.map((item) => {
+          if (item.id === id) {
+            return { ...item, text: newText };
+          }
+          return item;
+        });
+      });
+    }
+  };
+
   const toggle = (id) => {
     setTodoList((prev) => {
-        return prev.map((item) => {
-            if(item.id === id) {
-                return {...item, isComplete: !item.isComplete}
-            }
-            return item;
-        })
-    })
+      return prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, isComplete: !item.isComplete };
+        }
+        return item;
+      });
+    });
   };
+
   useEffect(() => {
-    console.log(todoList);
-  },[todoList]) 
+    //console.log(todoList);
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
   return (
     <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl">
       <div className="flex items-center mt-7 gap-2">
@@ -72,6 +93,8 @@ const Todo = () => {
               isComplete={item.isComplete}
               deleteTodo={deleteTodo}
               toggle={toggle}
+              handleEdit={handleEdit}
+              // updateTodo={updateTodo}
             />
           );
         })}
